@@ -1,0 +1,51 @@
+---
+layout: post
+title:  "Introduction to Docker"
+date:   2014-02-18 15:10:09
+categories: devops
+---
+
+![Docker whale](https://www.docker.io/static/img/homepage-docker-logo.png)
+#tl;dr
+This post gives a highlevel overview of **docker**. It also sums up what I've learned setting up **elasticsearch**, **neo4j** and a ruby **sinatra** service in docker containers.
+
+#What is docker?
+
+
+For further reading see this [infoq article](http://www.infoq.com/articles/docker-containers/) or the official [docker documentation](http://docker.io).
+
+#What is docker not?
+
+
+#Building blocks
+
+
+###Image
+
+
+###Container
+
+
+#Leave theory, talk practice
+
+###Install docker
+As docker is built on top of [linux containers (LXC)](http://linuxcontainers.org/), the best way to try it is on a linux computer.
+You can use it on other OSes like OS X as well, but I haven't tried that.
+https://www.digitalocean.com/community/articles/how-to-install-and-use-docker-getting-started/
+
+###Run an image
+[Docker CLI reference](http://docs.docker.io/en/latest/commandline/cli/)
+[docker index](https://index.docker.io/)
+
+###Create your own shiny new image with a Dockerfile
+[Dockerfile reference](http://docs.docker.io/en/latest/use/builder/)
+
+###Let it run
+
+###But, Mum, I'd like to store data!
+[Volumes](http://crosbymichael.com/advanced-docker-volumes.html)
+
+###Access ports from another container
+[this blog post](http://docs.docker.io/en/latest/use/working_with_links_names/)
+
+#Conclusion
