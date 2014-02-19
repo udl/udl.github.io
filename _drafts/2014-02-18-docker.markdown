@@ -17,19 +17,19 @@ Docker is basically an open source toolset for creating and managing VM-like [li
 The overall goal is to have **cheap**, **portable**, **composable**, **single responsibility** systems.
 
 ###cheap
-Linux containers are extremely lightweight compared to virtual machines, because they share some aspects of the hosts OS (like the kernel). This makes booting up a container really cheap.
+Linux containers are extremely lightweight compared to virtual machines, because they share some aspects of the hosts OS (like the kernel). This makes booting up a container really cheap and fast. If you're interested in a detailled performance analysis, you should read this [comparison](http://dtrace.org/blogs/brendan/2013/01/11/virtualization-performance-zones-kvm-xen/). It compares solaris zones, which are similar to linux containers, to xen and kvm.
 
 ###portable
-[Since version 0.7](http://tech-beta.slashdot.org/story/13/11/26/2317252/docker-07-runs-on-all-linux-distributions) (released end november 2013) docker containers run on all major linux distributions. As the system adds a layer on top of the hosts filesystem (called *[aufs](http://aufs.sourceforge.net/aufs.html)*), it doesn't care about the used filesystem. This means you can create the container on your developer ubuntu system with ext4 filesystem and then deploy the final version to a fedora VM inside an amazon EC2 instance with ext3.
+[Since version 0.7](http://tech-beta.slashdot.org/story/13/11/26/2317252/docker-07-runs-on-all-linux-distributions) docker containers run on all major linux distributions. As the system adds a layer on top of the hosts filesystem (called *[aufs](http://aufs.sourceforge.net/aufs.html)*), it doesn't care about the used filesystem. This means you can create the container on your developer ubuntu system with ext4 filesystem and then deploy the final version to a fedora VM inside an amazon EC2 instance with ext3.
 
 ###composable
-Docker makes it easy to expose ports to the host system, let other containers use ports from containers or let containers use disk volumes of certain containers. All this can be done with simple command line switches, you don't have to touch iptables or mtab.
+Docker makes it easy to expose ports to the host system or other containers or let containers use disk volumes of each other. All this can be done with simple command line switches, you don't have to touch iptables or mtab.
 
 ###single responsibility
-Developers know the [single responsibility principle](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod) from object oriented coding, the unix world knows it as ["do one thing and do it well"](http://en.wikipedia.org/wiki/Unix_philosophy).
+Developers know the [single responsibility principle](http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod) from object oriented coding. The unix world knows it as ["do one thing and do it well"](http://en.wikipedia.org/wiki/Unix_philosophy).
 This principle helps making your systems clear in what they do and easier to maintain.
 
-For further reading see this [infoq article](http://www.infoq.com/articles/docker-containers/) or take a look at these slides:
+For further reading on *what docker is* see this [infoq article](http://www.infoq.com/articles/docker-containers/) or take a look at these slides:
 <iframe src="http://www.slideshare.net/slideshow/embed_code/28618034" width="427" height="356" frameborder="0" marginwidth="0" marginheight="0" scrolling="no" style="border:1px solid #CCC; border-width:1px 1px 0; margin-bottom:5px; max-width: 100%;" allowfullscreen> </iframe>
 
 #What docker is not?
@@ -37,21 +37,26 @@ For further reading see this [infoq article](http://www.infoq.com/articles/docke
 
 #Building blocks
 
-
 ###Image
 
-
 ###Container
+
+###Dockerfile
 
 
 #Leave theory, talk practice
 
 ###Install docker
 As docker is built on top of [linux containers (LXC)](http://linuxcontainers.org/), the best way to try it is on a linux computer.
-You can use it on other OSes like OS X as well, but I haven't tried that.
-https://www.digitalocean.com/community/articles/how-to-install-and-use-docker-getting-started/
+You can use it on other OSes (like [OS X](http://docs.docker.io/en/latest/installation/mac/)) (because it runs well in already virtualized environments), but I haven't tried that yet.
+The installation is well documented, so I won't repeat that here.
+Just take those 2 links and come back once you've installed docker:
+
+* [docker.io](http://docs.docker.io/en/latest/installation/)
+* [digitalocean](https://www.digitalocean.com/community/articles/how-to-install-and-use-docker-getting-started/) 
 
 ###Run an image
+Now that you have docker installed, 
 [Docker CLI reference](http://docs.docker.io/en/latest/commandline/cli/)
 [docker index](https://index.docker.io/)
 
