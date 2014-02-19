@@ -56,9 +56,67 @@ Just take those 2 links and come back once you've installed docker:
 * [digitalocean](https://www.digitalocean.com/community/articles/how-to-install-and-use-docker-getting-started/) 
 
 ###Run an image
-Now that you have docker installed, 
-[Docker CLI reference](http://docs.docker.io/en/latest/commandline/cli/)
-[docker index](https://index.docker.io/)
+Now that you have docker installed, you're ready to roll!
+When you type
+
+{% highlight bash %}
+docker run base ping google.com
+{% endhighlight %}
+
+you should see something like this:
+
+![running ping google on a base image]({{ site.url }}/images/docker_base_ping.png)
+
+Now what happens there?
+{% highlight bash %}
+docker run base
+{% endhighlight %}
+
+tells docker to start a container from the **base** image. The cool thing is that you can pass a command to the container which it will execute: *ping google.com*.
+
+You can try the same with
+
+{% highlight bash %}
+docker run base ls -la
+{% endhighlight %}
+
+(Everything you can do on the command line: [Docker CLI reference](http://docs.docker.io/en/latest/commandline/cli/))
+
+###I want more functionality
+
+There's not much included in the base image, because it is meant to serve as a starting point. There isn't even curl installed. The docker ecosystem provides you another nice thing: the 
+[docker index](https://index.docker.io/).
+
+This is a database of predefined images from the docker guys and users.
+A quick search for *curl*, for example, brings this image up: [https://index.docker.io/u/speg03/curl/](https://index.docker.io/u/speg03/curl/).
+
+You can install it with
+{% highlight bash %}
+docker pull speg03/curl
+{% endhighlight %}
+
+and the result:
+
+![installing a new docker image]({{ site.url }}/images/docker_pull.png)
+
+Now you can *curl*, finally!
+{% highlight bash %}
+docker run -t -i speg03/curl -XGET http://google.com
+{% endhighlight %}
+
+which yields
+
+![result of curl from the docker image]({{ site.url }}/images/docker_curl.png)
+
+But wait, isn't there the *curl* command missing? You're absolutely right.
+
+If you take a look at the [Dockerfile](https://github.com/speg03/docker-curl/blob/master/Dockerfile), you can see the **ENTRYPOINT** statement at the bottom:
+
+{% highlight bash %}
+ENTRYPOINT ["curl"]
+{% endhighlight %}
+
+This command get's executed automatically when you spawn a container from an image. Every container has exactly **one** purpose, right? So this is where it goes. Let's move on to the next lesson: the Dockerfiles.
 
 ###Create your own shiny new image with a Dockerfile
 [Dockerfile reference](http://docs.docker.io/en/latest/use/builder/)
