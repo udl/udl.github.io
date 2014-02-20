@@ -3,14 +3,14 @@
 <head>
   <meta charset="utf-8">
   <title>
-    
-      Posts &ndash;
-    
-    Udo Groebner
+    {% if page.title %}
+      {{ page.title }} &ndash;
+    {% endif %}
+    {{ site.name }}
   </title>
 
-  <meta name="author" content="Udo Groebner" />
-  <meta name="description" content="modern web tech" />
+  <meta name="author" content="{{ site.name }}" />
+  <meta name="description" content="{{ site.description }}" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <link rel="alternate" type="application/rss+xml" href="/atom.xml" />
@@ -30,19 +30,19 @@
 <body>
   <section class="sidebar">
     <a href="/">
-      <img src="http://gravatar.com/avatar/28edaff2e9ba39c943bba5fa199243e8?s=150" height="75" width="75" class="avatar" />
+      <img src="{{ site.gravatar_url }}?s=150" height="75" width="75" class="avatar" />
     </a>
 
     <section class="name">
       <a href="/">
-        <span id="fname">Udo</span>
-        <span id="lname">Groebner</span>
+        <span id="fname">{{ site.name|split:' '|first }}</span>
+        <span id="lname">{{ site.name|split:' '|last }}</span>
       </a>
     </section>
 
     <section class="meta">
-      <a href="https://github.com/udl" target="_blank"><i class="icon icon-github"></i></a>
-      <a href="https://twitter.com/udlbua" target="_blank"><i class="icon icon-twitter"></i></a>
+      <a href="https://github.com/{{ site.github }}" target="_blank"><i class="icon icon-github"></i></a>
+      <a href="https://twitter.com/{{ site.twitter }}" target="_blank"><i class="icon icon-twitter"></i></a>
       <a href="/atom.xml"><i class="icon icon-rss"></i></a>
     </section>
 
@@ -54,11 +54,7 @@
     </section>
   </section>
 
-  <section class="content">
-  <ul class="listing">
-    
-  </ul>
-</section>
+  {{ content }}
 </body>
 
 </html>

@@ -1,3 +1,12 @@
-name: ugroebners blog
 markdown: redcarpet
 pygments: true
+permalink: /posts/:title
+rdiscount:
+  extensions: [smart]
+
+name: Udo Groebner
+url: http://udl.github.io
+description: modern web tech
+twitter: udlbua
+github: udl
+gravatar_url: http://gravatar.com/avatar/28edaff2e9ba39c943bba5fa199243e8
