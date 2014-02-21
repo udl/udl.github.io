@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Introduction to Docker"
-date:   2014-02-18 15:10:09
+date:   2014-02-21 09:10:09
 categories: devops
 ---
 
