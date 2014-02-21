@@ -332,4 +332,4 @@ For further reading visit the following sites:
 
 * [http://samsaffron.com/archive/2013/11/07/discourse-in-a-docker-container](http://samsaffron.com/archive/2013/11/07/discourse-in-a-docker-container)
 * [https://medium.com/code-adventures/65136a4a9d8](https://medium.com/code-adventures/65136a4a9d8)
-* [http://kencochrane.net/blog/2013/08/the-docker-guidebook/](http://kencochrane.net/blog/2013/08/the-docker-guidebook/}
+* [http://kencochrane.net/blog/2013/08/the-docker-guidebook/](http://kencochrane.net/blog/2013/08/the-docker-guidebook/)
