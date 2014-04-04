@@ -11,3 +11,4 @@ Analyze
 Explain
 
 ALWAYS make sure, the action is performed (debugged settings that weren't even used) ... index gets created anyways
+
