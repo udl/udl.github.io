@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "You don't have to stretch for search: elasticsearch"
-date:   2014-06-05 18:12:09
+date:   2014-06-05 16:12:09
 categories: frameworks
 ---
 
