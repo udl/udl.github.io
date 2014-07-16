@@ -5,8 +5,6 @@ date:   2014-07-16 11:39:09
 categories: devops
 ---
 
-# Using docker for testing
-
 The other day, I wrote a tiny application using [neo4j](http://www.neo4j.org/).
 While it's a nice piece of software, it supports just one running database.
 Running tests required a clean database, so I always had to stop the neo4j
