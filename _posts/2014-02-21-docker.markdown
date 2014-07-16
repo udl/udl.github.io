@@ -5,7 +5,7 @@ date:   2014-02-21 09:10:09
 categories: devops
 ---
 
-![Docker whale](https://www.docker.io/static/img/homepage-docker-logo.png)
+![Docker whale](http://www.docker.com/static/img/homepage/docker-whale-home-logo+.png)
 
 #tl;dr
 This post gives a highlevel overview of **docker**. It also sums up what I've learned setting up **elasticsearch**, **neo4j** and a ruby **sinatra** service in docker containers.
