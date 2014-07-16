@@ -6,7 +6,7 @@ categories: devops
 ---
 
 The other day, I wrote a tiny application using [neo4j](http://www.neo4j.org/).
-While it's a nice piece of software, it supports just one running database.
+While neo4j is a nice piece of software, it supports just one running database.
 Running tests required a clean database, so I always had to stop the neo4j
 instance, change the database path to test.db, run the tests
 and do the same hamsterdance again to have a development database in
