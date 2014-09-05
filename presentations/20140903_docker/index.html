@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Docker</title>
+    <link rel="stylesheet" type="text/css" href="build/build.css">
+  </head>
+  <body>
+    <article>
+      <section>
+        <h1>Docker</h1>
+        <p>3. September 2014</p><img src="https://d3oypxn00j2a10.cloudfront.net/0.8.0/img/homepage/docker-whale-home-logo.png">
+      </section>
+      <section>
+        <h2>What is docker?</h2>
+        <Basically>a toolset on top of <a href="https://linuxcontainers.org/">linux containers (LXC)</a></Basically>
+        <p>With docker you can:</p>
+        <ul>
+          <li></li>
+          <li>&#183; build</li>
+          <li>&#183; ship</li>
+          <li>&#183; run</li>
+        </ul>
+        <p>distributed applications</p>
+        <p>Main conceptual difference: docker aims to model processes!</p>
+      </section>
+      <section>
+        <h2>What is a linux container?</h2>
+        <p>Think VM...</p><img src="images/vm.png">
+        <p><small>&copy; https://www.docker.com/whatisdocker/</small></p>
+      </section>
+      <section>
+        <h2>What is a linux container?</h2>
+        <p>...on a diet</p><img src="images/docker.png">
+        <p><small>&copy; https://www.docker.com/whatisdocker/</small></p>
+      </section>
+      <section>
+        <h2>Differences - the good parts</h2>
+        <ul>
+          <li></li>
+          <li>&#183; Containers run in the same operating system as the host (sharing resources)</li>
+          <li><small>&#8658; But you can restrict resource usage.</small></li>
+          <li>&#183; Docker uses AuFS as file system layer. This divides the filesystem in a read and write layer.</li>
+          <li><small>&#8658; All running containers from the same image share the same readonly filesystem!</small></li>
+          <li>&#183; Intermediary build images are cached</li>
+          <li>&#183; Superfast startup (1-5 seconds)</li>
+          <li>&#183; rapidly growing ecosystem with lots of convenience tools</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Differences - the bad parts</h2>
+        <ul>
+          <li></li>
+          <li>&#183; VMs are a bit harder to break out from</li>
+          <li>&#183; Docker is linux only (though it works inside a VM)</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Building blocks: Images</h2>
+        <ul>
+          <li>
+            <h4>Image</h4>
+            <p>A read only layer (just like a DVD image)</p>
+          </li>
+          <li>
+            <h4>Parent image</h4>
+            <p>Each image may depend on another layer beneath it</p>
+          </li>
+          <li>
+            <h4>Base image</h4>
+            <p>An image without a parent</p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Building blocks: Images</h2><img src="http://docs.docker.com/terms/images/docker-filesystems-multilayer.png" height="80%">
+        <p><small>&copy; http://docs.docker.com/terms/image/</small></p>
+      </section>
+      <section>
+        <h2>Building blocks: Containers</h2>
+        <ul>
+          <li>
+            <p>When you run an image, docker adds a read-write layer on top of it.</p>
+          </li>
+          <li>
+            <p>This writable layer is the<b> container</b></p>
+          </li>
+          <li>
+            <p>You can promote a container to an image via<b> docker commit</b></p>
+          </li>
+          <li>
+            <p>Containers can be<b> restarted</b></p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Building blocks: Containers</h2><img src="http://docs.docker.com/terms/images/docker-filesystems-busyboxrw.png" height="80%">
+        <p><small>&copy; http://docs.docker.com/terms/container/</small></p>
+      </section>
+      <section>
+        <h2>Bored already?</h2><img src="http://cdn.cutestpaw.com/wp-content/uploads/2012/11/l-The-cutest-yawn.jpg" height="300px">
+        <p><small>&copy; http://www.cutestpaw.com/</small></p>
+      </section>
+      <section>
+        <h2>What can I do?</h2>
+        <h2>How does it work?</h2>
+      </section>
+      <section>
+        <h2>The Dockerfile</h2>
+        <pre><code class="language-javascript">FROM litaio/ruby
+RUN apt-get update -qq &amp;&amp; apt-get install -y ca-certificates
+RUN gem install bundler
+ADD . /root/app
+WORKDIR /root/app
+ENV HOME /root
+RUN bundle install
+EXPOSE 3000
+ENTRYPOINT bundle exec unicorn -c config/unicorn.rb
+</code></pre>
+      </section>
+      <section>
+        <h2>The Docker Registry</h2><a href="https://registry.hub.docker.com/" target="_blank">&#8594; this way &#8592;</a>
+      </section>
+      <section>
+        <h2>Demo</h2>
+        <pre><code class="language-javascript">docker run base ping google.com
+docker ps -a
+docker images
+docker run -p 7474:7474 --name 'neo4j' -d tpires/neo4j
+</code></pre>
+      </section>
+      <section>
+        <h2>Container links</h2>
+        <pre><code class="language-javascript">(consumer) &#8594; (redis)</code></pre>
+        <pre><code class="language-javascript">docker run --link neo4j:neo
+--name="app" -d "the_app"</code></pre>
+        <pre><code class="language-javascript">tcp_address = ENV['NEO_PORT_7474_TCP_ADDR']
+port = ENV['NEO_PORT_7474_TCP_PORT']
+</code></pre>
+      </section>
+      <section>
+        <h2>Data volume container</h2>
+        <pre><code class="language-javascript">(neo4j) &#8594; (neo4j-data-volume)</code></pre>
+        <h4>Dockerfile</h4>
+        <pre><code class="language-javascript">VOLUME /data
+</code></pre>
+        <h4>Starting the container</h4>
+        <pre><code class="language-javascript">docker run --name neo4j
+--volumes-from neo4j-data-volume
+-d neo4j:2.1.2
+</code></pre>
+      </section>
+      <section>
+        <h2>Multi-server: meet the ambassador pattern</h2>
+        <pre><code class="language-javascript">(consumer) &#8594; (redis)</code></pre>
+        <pre><code class="language-javascript">(consumer) &#8594; (redis-ambassador) &#8594; (redis)</code></pre>
+        <pre><code class="language-javascript">(consumer) &#8594; (redis-ambassador) &#8594; &#9729; &#8594; (redis-ambassador) &#8594; (redis)
+</code></pre>
+      </section>
+      <section>
+        <h2>Ambassador example</h2>
+        <pre><code class="language-javascript">docker run -d --name redis_ambassador
+--expose 6379 -e REDIS_PORT_6379_TCP=tcp://192.168.1.52:6379
+svendowideit/ambassador
+</code></pre>
+      </section>
+      <section>
+        <h2>Security</h2>
+        <p>LXC uses</p>
+        <ul>
+          <li>
+            <p><b>Linux capabilities support:</b></p>
+            <p>&#183; list, enable and disable capabilities like</p>
+            <p>CHOWN, KILL, NET_BIND_SERVICE, SYS_CHROOT, ...</p>
+          </li>
+          <li>
+            <p><b>Control groups:</b></p>
+            <p>&#183; Resource quotas, Access restrictions, ...</p>
+          </li>
+          <li>
+            <p><b>User namespace</b></p>
+            <p>&#183; LXC is no longer running as root</p>
+            <p><i>But the docker daemon is!</i></p>
+          </li>
+          <li>
+            <p><b>Apparmor, SELinux, other kernel hardening solutions</b></p>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Tools</h2>
+        <p>The ecosystem is growing rapidly.</p>
+        <p>Here are some interesting projects.</p>
+      </section>
+      <section>
+        <h2>Tools</h2><!--img(src="http://www.fig.sh/img/logo.png" height="100px")-->
+        <h3>Fig</h3>
+        <p>Define and start your depent containers all in one.</p>
+        <pre><code class="language-javascript">web:
+  build: .
+  command: bundle exec unicorn -c config/unicorn.rb
+  links:
+   - memcached
+  environment:
+   - NEO_USER=neoadmin
+memcached:
+  image: borja/docker-memcached
+  </code></pre>
+      </section>
+      <section>
+        <h2>Tools</h2><img src="images/serf.png">
+        <p>Decentralized cluster management, failure handling and high availability.</p>
+      </section>
+      <section>
+        <h2>Tools</h2><img src="http://coreos.com/assets/images/brand/coreos-wordmark-horiz-color.png" height="100px">
+        <h3>CoreOS</h3>
+        <ul>
+          <li>A minimal linux system (Linux kernel + systemd)</li>
+          <li>+ Built for running docker containers</li>
+          <li>+ Service discovery</li>
+          <li>
+            <h4>Fleet (from CoreOS)</h4>
+          </li>
+          <li>Systemd at the cluster level</li>
+        </ul>
+      </section>
+      <section>
+        <h2>Tools</h2><img src="http://www.seo-united.de/blog/wp-content/uploads/2013/09/google_logo_2013.png" height="100px">
+        <h3>Kubernetes</h3>
+        <p>"Kubernetes is a system for managing containerized applications across multiple hosts, providing basic mechanisms for deployment, maintenance, and scaling of applications."</p>
+      </section>
+      <section>
+        <h2>Tools</h2><img src="images/flynn.png">
+        <p>Self-hosted Heroku</p><img src="images/panamax.png">
+        <p>Build your own infrastructure with a nice UI</p>
+      </section>
+      <section>
+        <h2>Who's using it already?</h2>
+        <p>Google, amazon, IBM, Microsoft, ebay, yandex, newrelic, mailgun, spotify, yelp, ...</p>
+        <p>You can run it with Red hat, ubuntu, OpenStack, VMWare, azure, EC2, google compute, ...</p>
+      </section>
+      <section>
+        <h2>Questions?</h2>
+      </section>
+      <section>
+        <h2>Appendix</h2>
+      </section>
+      <section>
+        <h2>Building blocks: Images</h2>
+        <p>Since Docker uses a Union File System, the processes think the whole file system is mounted read-write. But all the changes go to the top-most writeable layer, and underneath, the original file in the read-only image is unchanged. Since images don't change, images do not have state.</p>
+      </section>
+    </article>
+    <script src="build/build.js"></script>
+  </body>
+</html>
