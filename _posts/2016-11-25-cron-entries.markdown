@@ -10,6 +10,7 @@ day. Turns out, this is not an easy task. Although cron is really
 powerful.
 
 This is the solution:
+
 ```
 0 4 8-14,22-28 * *    /bin/bash -c 'test $(date +%u) -eq 7 && yourcommand.sh'
 ```
