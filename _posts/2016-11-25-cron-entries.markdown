@@ -15,6 +15,7 @@ This is the solution:
 0 4 8-14,22-28 * *    /bin/bash -c 'test $(date +\%u) -eq 7 && yourcommand.sh'
 ```
 
+
 How does this work? It triggers every day between 8. and 14. as well as
 from 22. to 28.
 
